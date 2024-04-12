@@ -1,6 +1,7 @@
 ﻿using ConsoleApp;
 using FactoryLibrary.Interfaces;
 using FactoryLibrary.Vendors;
+using FactoryLibrary.Vendors.enums;
 
 while (true)
 {
@@ -33,8 +34,10 @@ while (true)
     switch ((Scenario)selectedScenario)
     {
         case Scenario.Factory:
-            WebSite webSite = new();
             ISubscription sub;
+            
+            Console.WriteLine("WebSite:");
+            WebSite webSite = new();
             
             try
             {
@@ -49,19 +52,46 @@ while (true)
 
             try
             {
-                Console.WriteLine("\nPressing 'Buy Educational Subscription' button:");
-                sub = webSite.EducationalSubscriptionFormSubmit(320);
+                Console.WriteLine("\nPressing 'Buy Premium Subscription' button:");
+                sub = webSite.PremiumSubscriptionFormSubmit(99);
                 Console.WriteLine($"New Purchase:\n{sub}");
             }
             catch (Exception e)
             {
                 Console.WriteLine($"{e.GetType()}: {e.Message}");
             }
-
+            
+            Console.WriteLine("\nMobileApp:");
+            MobileApp mobileApp = new();
+            
             try
             {
-                Console.WriteLine("\nPressing 'Buy Premium Subscription' button:");
-                sub = webSite.PremiumSubscriptionFormSubmit(99);
+                Console.WriteLine("Selecting 'Premium Subscription'...");
+                mobileApp.SelectSubscription(SubscriptionType.Premium);
+                Console.WriteLine("Entering period...");
+                mobileApp.AskForPeriod(42);
+                Console.WriteLine("Confirming purchase...");
+                sub = mobileApp.ConfirmSubscriptionPurchase();
+                Console.WriteLine($"New Purchase:\n{sub}");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"{e.GetType()}: {e.Message}");
+            }
+            
+            Console.WriteLine("\nManagerCall:");
+            ManagerCall managerCall = new();
+            
+            try
+            {
+                Console.WriteLine("Calling manager...");
+                managerCall.AcceptCall();
+                Console.WriteLine("Verification...\nSelecting subscription plan (Educational)...");
+                managerCall.AskForSubscriptionType(SubscriptionType.Educational);
+                Console.WriteLine("Selecting period...");
+                managerCall.AskForPeriod(128);
+                Console.WriteLine("Confirming purchase...");
+                sub = managerCall.ConfirmPurchase();
                 Console.WriteLine($"New Purchase:\n{sub}");
             }
             catch (Exception e)
