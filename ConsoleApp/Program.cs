@@ -1,4 +1,6 @@
 ﻿using ConsoleApp;
+using FactoryLibrary.Interfaces;
+using FactoryLibrary.Vendors;
 
 while (true)
 {
@@ -31,6 +33,42 @@ while (true)
     switch ((Scenario)selectedScenario)
     {
         case Scenario.Factory:
+            WebSite webSite = new();
+            ISubscription sub;
+            
+            try
+            {
+                Console.WriteLine("Pressing 'Buy Domestic Subscription' button:");
+                sub = webSite.DomesticSubscriptionFormSubmit(10); // Will cause an exception, 10 < MinimalPeriod
+                Console.WriteLine($"New Purchase:\n{sub}");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"{e.GetType()}: {e.Message}");
+            }
+
+            try
+            {
+                Console.WriteLine("\nPressing 'Buy Educational Subscription' button:");
+                sub = webSite.EducationalSubscriptionFormSubmit(320);
+                Console.WriteLine($"New Purchase:\n{sub}");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"{e.GetType()}: {e.Message}");
+            }
+
+            try
+            {
+                Console.WriteLine("\nPressing 'Buy Premium Subscription' button:");
+                sub = webSite.PremiumSubscriptionFormSubmit(99);
+                Console.WriteLine($"New Purchase:\n{sub}");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"{e.GetType()}: {e.Message}");
+            }
+            
             break;
         case Scenario.AbstractFactory:
             break;
