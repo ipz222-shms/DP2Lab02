@@ -1,4 +1,7 @@
-﻿using ConsoleApp;
+﻿using AbstractFactoryLibrary.Factories;
+using AbstractFactoryLibrary.Factories.Interfaces;
+using AbstractFactoryLibrary.Products.Interfaces;
+using ConsoleApp;
 using FactoryLibrary.Interfaces;
 using FactoryLibrary.Vendors;
 using FactoryLibrary.Vendors.enums;
@@ -101,6 +104,28 @@ while (true)
             
             break;
         case Scenario.AbstractFactory:
+            List<ITechFactory> factories = new()
+            {
+                new BalaxyFactory(),
+                new KiaomiFactory(),
+                new PearFactory()
+            };
+            
+            IEBook ebook;
+            ILaptop laptop;
+            INetbook netbook;
+            ISmartphone smartphone;
+
+            foreach (var factory in factories)
+            {
+                ebook = factory.ProduceEBook();
+                laptop = factory.ProduceLaptop();
+                netbook = factory.ProduceNetbook();
+                smartphone = factory.ProduceSmartphone();
+                
+                Console.WriteLine($"{factory}:\n\t{ebook}\n\t{laptop}\n\t{netbook}\n\t{smartphone}\n");
+            }
+            
             break;
         case Scenario.Singleton:
             break;
