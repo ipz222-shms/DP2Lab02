@@ -5,6 +5,7 @@ using ConsoleApp;
 using FactoryLibrary.Interfaces;
 using FactoryLibrary.Vendors;
 using FactoryLibrary.Vendors.enums;
+using SingletonLibrary;
 
 while (true)
 {
@@ -128,6 +129,27 @@ while (true)
             
             break;
         case Scenario.Singleton:
+            // Because we use a static class, we don't need to create an instance property inside of it
+            // In .NET only one instance of static class can exist, and it initializes with the first use
+            
+            Console.WriteLine($"Is authorized: {Authenticator.IsAuth()}\nAuthorizing (admin, admin)...");
+            Authenticator.Auth("admin", "admin");
+            Console.WriteLine($"Is authorized: {Authenticator.IsAuth()}\nChanging password...");
+            Authenticator.ChangePassword("admin", "Samurai");
+            Console.WriteLine($"Is authorized: {Authenticator.IsAuth()}\nAuthorizing (admin, admin)...");
+            try
+            {
+                Authenticator.Auth("admin", "admin");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            Console.WriteLine("Authorizing (admin, Samurai)...");
+            Authenticator.Auth("admin", "Samurai");
+            Console.WriteLine($"Is authorized: {Authenticator.IsAuth()}\nLogging out...");
+            Authenticator.Logout();
+            Console.WriteLine($"Is authorized: {Authenticator.IsAuth()}");
             break;
         case Scenario.Prototype:
             break;
