@@ -181,7 +181,10 @@ while (true)
             
             break;
         case Scenario.Builder:
-            var heroBuilder = new HeroBuilder()
+            var hero = new HeroBuilder()
+                .DoGood("save humanity")
+                .DoGood("cure people")
+                .DoGood("save the world")
                 .Name("Dr. Strange")
                 .Sex("Male")
                 .Height(189)
@@ -199,17 +202,14 @@ while (true)
                 {
                     new() { Name = "Cloak of Levitation" },
                     new() { Name = "Sling Ring" }
-                });
-            
-            var hero = ((HeroBuilder)heroBuilder)
-                .DoGood("save humanity")
-                .DoGood("cure people")
-                .DoGood("save the world")
+                })
                 .GetCharacter();
-            
+
             Console.WriteLine(hero);
 
-            var enemyBuilder = new EnemyBuilder()
+            var enemy = new EnemyBuilder()
+                .DoBad("bomb Arasaka")
+                .DoBad("kill people")
                 .Name("Johnny Silverhand")
                 .Sex("Male")
                 .Height(186)
@@ -234,13 +234,9 @@ while (true)
                     new() { Name = "Aviators" },
                     new() { Name = "Cyberarm" },
                     new() { Name = "Malorian Arms 3516" },
-                });
-
-            var enemy = ((EnemyBuilder)enemyBuilder)
-                .DoBad("bomb Arasaka")
-                .DoBad("kill people")
+                })
                 .GetCharacter();
-            
+
             Console.WriteLine($"\n{enemy}");
             
             break;
