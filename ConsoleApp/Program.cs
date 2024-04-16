@@ -1,6 +1,7 @@
 ﻿using AbstractFactoryLibrary.Factories;
 using AbstractFactoryLibrary.Factories.Interfaces;
 using AbstractFactoryLibrary.Products.Interfaces;
+using BuilderLibrary;
 using ConsoleApp;
 using FactoryLibrary.Interfaces;
 using FactoryLibrary.Vendors;
@@ -180,6 +181,59 @@ while (true)
             
             break;
         case Scenario.Builder:
+            var hero = new HeroBuilder()
+                .Name("Dr. Strange")
+                .Sex("Male")
+                .Height(189)
+                .Weight(82)
+                .BodyType("Average")
+                .Eyes("yellow")
+                .Hair("black")
+                .AddItems(new Dictionary<Item, int>
+                {
+                    { new Item { Name = "Time Stone" }, 1 },
+                    { new Equipment { Name = "Cloak of Levitation" }, 1 },
+                    { new Equipment { Name = "Sling Ring" }, 1 }
+                })
+                .EquipItems(new List<Equipment>
+                {
+                    new() { Name = "Cloak of Levitation" },
+                    new() { Name = "Sling Ring" }
+                })
+                .GetCharacter();
+            
+            Console.WriteLine(hero);
+
+            var enemy = new EnemyBuilder()
+                .Name("Johnny Silverhand")
+                .Sex("Male")
+                .Height(186)
+                .Weight(79)
+                .BodyType("Muscular")
+                .Eyes("blue")
+                .Hair("black")
+                .AddItems(new Dictionary<Item, int>
+                {
+                    { new Equipment { Name = "Ballistic vest" }, 1 },
+                    { new Equipment { Name = "Samurai jacket" }, 1 },
+                    { new Equipment { Name = "Aviators" }, 1 },
+                    { new Equipment { Name = "Cyberarm" }, 1 },
+                    { new Equipment { Name = "Malorian Arms 3516" }, 1 },
+                    { new Item { Name = "Porsche 911 Turbo" }, 1 },
+                    { new Item { Name = "Dog tags" }, 2 },
+                })
+                .EquipItems(new List<Equipment>
+                {
+                    new() { Name = "Ballistic vest" },
+                    new() { Name = "Samurai jacket" },
+                    new() { Name = "Aviators" },
+                    new() { Name = "Cyberarm" },
+                    new() { Name = "Malorian Arms 3516" },
+                })
+                .GetCharacter();
+            
+            Console.WriteLine($"\n{enemy}");
+            
             break;
         default:
             throw new NotImplementedException();
