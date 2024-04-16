@@ -5,6 +5,7 @@ using ConsoleApp;
 using FactoryLibrary.Interfaces;
 using FactoryLibrary.Vendors;
 using FactoryLibrary.Vendors.enums;
+using PrototypeLibrary;
 using SingletonLibrary;
 
 while (true)
@@ -152,6 +153,31 @@ while (true)
             Console.WriteLine($"Is authorized: {Authenticator.IsAuth()}");
             break;
         case Scenario.Prototype:
+            Virus gen1 = new("Covid-19", "SARS-CoV-2", 0.81, 5);
+            Console.WriteLine($"Gen 1: {gen1}");
+            
+            var gen2 = gen1.Clone() as Virus;
+            gen2.Name = "Covid-21";
+            gen2.Weight += 0.03;
+            gen2.Age -= 2;
+            Console.WriteLine($"Gen 2: {gen2}");
+
+            var gen3 = gen2.Clone() as Virus;
+            gen3.Name = "Covid-22";
+            gen3.Weight += 0.09;
+            gen3.Age--;
+            Console.WriteLine($"Gen 3: {gen3}");
+
+            gen1.AddChild(gen2);
+            gen2.AddChild(gen3);
+            Console.WriteLine($"\nAdding children...\n\nGen 1: {gen1}");
+            
+            var gen1Clone = gen1.Clone() as Virus;
+            Console.WriteLine($"\nCloning Gen 1...\n\nGen 1 Clone: {gen1Clone}");
+            
+            var gen2Clone = gen2.Clone() as Virus;
+            Console.WriteLine($"\nCloning Gen 2...\n\nGen 2 Clone: {gen2Clone}");
+            
             break;
         case Scenario.Builder:
             break;
