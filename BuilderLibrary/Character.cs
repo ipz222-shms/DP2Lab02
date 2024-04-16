@@ -15,7 +15,7 @@ public class Character
     private string? _hairColor;
     internal HashSet<Equipment> _equipments = new();
     internal Dictionary<Item, int> _inventory = new();
-    private List<string> _actions = new();
+    private readonly List<string> _actions = new();
     
     internal void SetType(string type) => _type = type;
     internal void SetName(string name) => _name = name;

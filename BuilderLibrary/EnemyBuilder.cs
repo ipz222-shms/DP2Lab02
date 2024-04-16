@@ -10,7 +10,7 @@ public class EnemyBuilder : ICharacterBuilder
     
     private void Reset() => _character = new Character();
 
-    public ICharacterBuilder DoBad(string badThing)
+    public EnemyBuilder DoBad(string badThing)
     {
         _character.AddAction(badThing);
         return this;

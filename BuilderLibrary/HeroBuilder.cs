@@ -10,7 +10,7 @@ public class HeroBuilder : ICharacterBuilder
     
     private void Reset() => _character = new Character();
 
-    public ICharacterBuilder DoGood(string goodThing)
+    public HeroBuilder DoGood(string goodThing)
     {
         _character.AddAction(goodThing);
         return this;
